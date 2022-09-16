@@ -1,0 +1,48 @@
+id: com.github.virtual_puppet_project.vpuppr
+runtime: org.freedesktop.Platform
+runtime-version: "22.08"
+sdk: org.freedesktop.Sdk
+command: vpuppr.x86_64
+finish-args:
+    - "--socket=x11"
+    - "--share=ipc"
+    - "--share=network" # Required for communication between openseeface and vpuppr
+    - "--device=all" # webcam
+    - "--socket=pulseaudio"
+    - "--filesystem=home" # to see all files (vpuppr uses its own file picker), and function to select models properly
+modules:
+
+  # --- Puppeteer ---
+  - name: puppeteer
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/bin/resources
+      - mkdir -p /app/share/vpuppr/resources/
+      - install -Dm644 com.github.virtual_puppet_project.vpuppr.metainfo.xml -t /app/share/metainfo/
+      - rm com.github.virtual_puppet_project.vpuppr.metainfo.xml
+      
+      - install -Dm 644 -t /app/share/applications com.github.virtual_puppet_project.vpuppr.desktop
+      - install -Dm 644 com.github.virtual_puppet_project.vpuppr-128.png /app/share/icons/hicolor/128x128/apps/com.github.virtual_puppet_project.vpuppr.png
+      - install -Dm 644 com.github.virtual_puppet_project.vpuppr-256.png /app/share/icons/hicolor/256x256/apps/com.github.virtual_puppet_project.vpuppr.png
+      - rm com.github.virtual_puppet_project.vpuppr-{128,256}.png
+
+      - mv vpuppr.* /app/bin/
+      - chmod +x /app/bin/vpuppr.x86_64
+      - mv translations /app/bin/resources
+      - mv licenses extensions /app/share/vpuppr/resources
+      - chmod +x /app/share/vpuppr/resources/extensions/open_see_face/OpenSeeFaceFolder/OpenSeeFace/facetracker
+#      - mv /app/bin/gui /app/bin/licenses /app/bin/translations /app/bin/resources/
+#      - mv /app/bin/OpenSeeFace /app/bin/OpenSeeFaceFolder/
+
+    sources:
+      - type: archive
+        url: https://github.com/virtual-puppet-project/vpuppr/releases/download/0.9.0-alpha-2/vpuppr_0.9.0-alpha-2_linux_flatpak_compatible.zip
+        sha256: 15ab443fe42d75004d3754a5f89f1243eac5dac7f41519073989df8c67df7c0f
+      - type: file
+        path: com.github.virtual_puppet_project.vpuppr.desktop
+      - type: file
+        path: icons/com.github.virtual_puppet_project.vpuppr-128.png
+      - type: file
+        path: icons/com.github.virtual_puppet_project.vpuppr-256.png
+      - type: file
+        path: com.github.virtual_puppet_project.vpuppr.metainfo.xml
