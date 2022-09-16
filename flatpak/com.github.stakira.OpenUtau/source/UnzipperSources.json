@@ -1,0 +1,16 @@
+[
+    {
+        "type": "file",
+        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.netframework.referenceassemblies/1.0.2/microsoft.netframework.referenceassemblies.1.0.2.nupkg",
+        "sha512": "8bf3922b695856059b8eec696a7ace03a7269d71d4c456cbdfb21bd3f6e69f2a9fa25e46acd5c29ad872829a07cc05ec083c3a6ee942bca21afd47ce3bc533e3",
+        "dest": "nuget-sources",
+        "dest-filename": "microsoft.netframework.referenceassemblies.1.0.2.nupkg"
+    },
+    {
+        "type": "file",
+        "url": "https://api.nuget.org/v3-flatcontainer/microsoft.netframework.referenceassemblies.net45/1.0.2/microsoft.netframework.referenceassemblies.net45.1.0.2.nupkg",
+        "sha512": "f27ad45c56c19ac11f1d4e2ef05f52732fa5b95a6f5d39ec637f43170e9bc41f811dbcf3b399ab93a82ea32e018f2fff7e549cb321a11ba478507d95a99992cd",
+        "dest": "nuget-sources",
+        "dest-filename": "microsoft.netframework.referenceassemblies.net45.1.0.2.nupkg"
+    }
+]

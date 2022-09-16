@@ -1,0 +1,53 @@
+app-id: com.github.stakira.OpenUtau
+runtime: org.freedesktop.Platform
+runtime-version: '21.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.dotnet6
+build-options:
+  append-path: "/usr/lib/sdk/dotnet6/bin"
+  append-ld-library-path: "/usr/lib/sdk/dotnet6/lib"
+  append-pkg-config-path: ":/usr/lib/sdk/dotnet6/lib/pkgconfig"
+  env:
+    DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+  # build-args:
+  #   - --share=network
+command: OpenUtau
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --filesystem=home
+  - --socket=pulseaudio
+  - --device=all
+modules:
+
+  - name: OpenUtau
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/bin
+      - '. /usr/lib/sdk/dotnet6/enable.sh; dotnet publish -r linux-x64 --source nuget-sources -c Release -o /app/bin/ OpenUtau --self-contained true' #dotnet restore --source nuget-sources; dotnet build -c Release --source nuget-sources OpenUtau/OpenUtau.csproj
+#      - mv OpenUtau/bin/Release/net6.0/* /app/bin/
+#      - ls OpenUtau/bin/Release/
+
+    sources:
+      - type: git
+        url: https://github.com/stakira/OpenUtau.git
+        commit: 09c59e0ab8b5d19ff4e499123e68c1c4a7542f56
+
+      - UnzipperSources.json
+      - OpenUtauSources.json
+      - OpenUtauSourcesPlugin.json
+      - OpenUtauSourcesTest.json
+      - OpenUtauSourcesCore.json
+
+
+#Commented out, as the runtime is already specified by the .json files
+      # - type: file
+      #   url: https://api.nuget.org/v3-flatcontainer/microsoft.aspnetcore.app.runtime.linux-x64/6.0.8/microsoft.aspnetcore.app.runtime.linux-x64.6.0.8.nupkg
+      #   dest: nuget-sources
+      #   dest-filename: microsoft.aspnetcore.app.runtime.linux-x64.6.0.1.nupkg
+      #   sha512: dc78a0e6c3f800b9b469a07771809d8665b46ba4a04f6dd179a3f9a18399f69d5f428432e1f1de2e55362d74135e0243a29777b1064269683adfdac9098a6989
+      # - type: file
+      #   url: https://api.nuget.org/v3-flatcontainer/microsoft.netcore.app.runtime.linux-x64/6.0.8/microsoft.netcore.app.runtime.linux-x64.6.0.8.nupkg
+      #   dest: nuget-sources
+      #   sha512: 723573014898c4fbfde3d99797421bc33491ab4c414c6716dcdeb5f4251c0b07b7e4c6b50b54e0d6787be5773e3849f9f9e00c5bf4bae9dcbe91085d736efbb4
