@@ -1,0 +1,14 @@
+app-id: com.github.dylanaraps.neofetch
+runtime: org.freedesktop.Platform
+runtime-version: '21.08'
+sdk: org.freedesktop.Sdk
+command: neofetch
+modules:
+  - name: neofetch 
+    buildsystem: simple
+    build-commands:
+      - make PREFIX=/app/ install
+    sources:
+      - type: git
+        url: https://github.com/dylanaraps/neofetch.git
+        commit: ccd5d9f52609bbdcd5d8fa78c4fdb0f12954125f
