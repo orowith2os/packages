@@ -10,5 +10,5 @@ modules:
       - make PREFIX=/app/ install
     sources:
       - type: git
-        url: https://github.com/dylanaraps/neofetch.git
-        commit: ccd5d9f52609bbdcd5d8fa78c4fdb0f12954125f
+        url: https://github.com/hykilpikonna/hyfetch.git
+        commit: 9e001c530f396d1a32963cd888c6d66977676840
