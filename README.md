@@ -1,2 +1,1 @@
-# packages
-A collection of packages I've made, some of which have been upstreamed.
+Migrated to https://gitlab.com/OroWith2Os/packages
